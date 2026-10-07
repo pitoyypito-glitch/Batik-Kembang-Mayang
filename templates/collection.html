@@ -1,0 +1,133 @@
+{% extends "base.html" %} {% block title %}{{ t('nav.collection') }}{% endblock
+%} {% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('collection.motifs.kicker') }}</span>
+      <h2>{{ t('collection.motifs.title') | safe }}</h2>
+      <p>{{ t('collection.motifs.lede') }}</p>
+    </div>
+
+    {% set motifs = [
+      {"key": "motif5", "img": "arya-nalendra.jpg"},
+      {"key": "motif6", "img": "maheswara.jpg"},
+      {"key": "motif7", "img": "swarna-pattana.jpg"},
+      {"key": "motif8", "img": "ripah-jinawi.jpg"},
+      {"key": "motif9", "img": "sekarnusa.jpg"},
+      {"key": "motif10", "img": "rimba-kareo.jpg"},
+      {"key": "motif11", "img": "aranyaloka.jpg"},
+      {"key": "motif12", "img": "kusuma-paksi.jpg"},
+      {"key": "motif13", "img": "telang-larangan.jpg"},
+      {"key": "motif14", "img": "kusuma-lelana.jpg"},
+      {"key": "motif15", "img": "tajisakti.jpg"},
+      {"key": "motif16", "img": "arum-kinasih.jpg"},
+      {"key": "motif17", "img": "puspa-sandri.jpg"},
+      {"key": "motif18", "img": "swarna-gauri.jpg"},
+    ] %}
+
+    <div class="motif-carousel">
+      <button
+        type="button"
+        class="carousel-arrow carousel-prev"
+        aria-label="{{ t('collection.motifs.prev') }}"
+        disabled
+      >
+        ‹
+      </button>
+
+      <div
+        class="motif-track"
+        id="motifTrack"
+        tabindex="0"
+        role="group"
+        aria-label="{{ t('collection.motifs.title') }}"
+      >
+        {% for m in motifs %}
+        <div
+          class="motif-card reveal"
+          data-motif-card
+          style="--d: {{ ([loop.index0, 4] | min) * 0.05 }}s"
+        >
+          <div class="motif-swatch motif-photo">
+            <img
+              src="{{ url_for('static', filename='img/motif/' ~ m.img) }}"
+              alt="{{ t('collection.' ~ m.key ~ '.name') }}"
+              width="600"
+              height="900"
+              decoding="async"
+              {% if loop.index0 >= 5 %}loading="lazy"{% endif %}
+            />
+          </div>
+          <div class="motif-body">
+            <h4>{{ t('collection.' ~ m.key ~ '.name') }}</h4>
+            <p class="motif-meaning">
+              <strong>{{ t('collection.motifs.meaning_label') }}:</strong>
+              {{ t('collection.' ~ m.key ~ '.meaning') }}
+            </p>
+            <p>{{ t('collection.' ~ m.key ~ '.desc') }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <button
+        type="button"
+        class="carousel-arrow carousel-next"
+        aria-label="{{ t('collection.motifs.next') }}"
+      >
+        ›
+      </button>
+    </div>
+
+    <div class="motif-dots" id="motifDots" aria-hidden="true">
+      {% for m in motifs %}
+      <span
+        class="motif-dot{% if loop.first %} is-active{% endif %}"
+        data-motif-dot
+      ></span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('collection.testimonials.kicker') }}</span>
+      <h2>{{ t('collection.testimonials.title') | safe }}</h2>
+      <p>{{ t('collection.testimonials.lede') }}</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <p>{{ t('collection.testi1.quote') }}</p>
+        <div class="testi-name">{{ t('collection.testi1.name') }}</div>
+        <div class="testi-role">{{ t('collection.testi1.role') | safe }}</div>
+      </div>
+      <div class="testi-card">
+        <p>{{ t('collection.testi2.quote') }}</p>
+        <div class="testi-name">{{ t('collection.testi2.name') }}</div>
+        <div class="testi-role">{{ t('collection.testi2.role') | safe }}</div>
+      </div>
+      <div class="testi-card">
+        <p>{{ t('collection.testi3.quote') }}</p>
+        <div class="testi-name">{{ t('collection.testi3.name') }}</div>
+        <div class="testi-role">{{ t('collection.testi3.role') | safe }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container cta-banner-inner">
+    <div>
+      <h2>{{ t('home.cta.title') }}</h2>
+      <p>{{ t('home.cta.lede') | safe }}</p>
+    </div>
+    <a class="btn btn-primary" href="{{ url_for('contact') }}"
+      >{{ t('home.cta.button') }}</a
+    >
+  </div>
+</section>
+
+{% endblock %}

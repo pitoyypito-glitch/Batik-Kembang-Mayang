@@ -1,0 +1,353 @@
+{% extends "base.html" %} {% block title %}{{ t('nav.home') }}{% endblock %} {%
+block content %} {% include "_km_defs.html" %}
+
+<section class="hero">
+  <div class="hero-media" data-parallax aria-hidden="true">
+    <img
+      class="hero-bg"
+      src="{{ url_for('static', filename='img/hero-aranyaloka.jpeg') }}"
+      alt=""
+      width="1600"
+      height="900"
+      fetchpriority="high"
+    />
+  </div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <span class="hero-eyebrow hero-rise" style="--d: 0.1s"
+      >{{ t('home.hero.eyebrow') | safe }}</span
+    >
+    <h1 aria-label="{{ t('home.hero.title') }}">
+      {% for w in t('home.hero.title').split() %}<span
+        class="w"
+        aria-hidden="true"
+        style="--i: {{ loop.index0 }}"
+        >{{ w }}</span
+      >
+      {% endfor %}
+    </h1>
+    <p class="hero-lede hero-rise" style="--d: 0.9s">
+      {{ t('home.hero.lede') | safe }}
+    </p>
+    <div class="hero-actions hero-rise" style="--d: 1.1s">
+      <a
+        class="btn btn-primary"
+        href="{{ wa_link(t('home.hero.wa_message')) }}"
+        target="_blank"
+        rel="noopener"
+        >{{ t('home.hero.cta_primary') }}</a
+      >
+      <a class="btn btn-ghost" href="{{ url_for('craft') }}"
+        >{{ t('home.hero.cta_secondary') }}</a
+      >
+    </div>
+  </div>
+</section>
+
+<div class="fact-strip reveal" aria-label="{{ t('home.pillars.kicker') }}">
+  <div class="container fact-strip-inner">
+    <p class="fact">
+      <span class="fact-dot" aria-hidden="true"></span>{{ t('home.facts.item1')
+      }}
+    </p>
+    <p class="fact">
+      <span class="fact-dot" aria-hidden="true"></span>{{ t('home.facts.item2')
+      }}
+    </p>
+    <p class="fact">
+      <span class="fact-dot" aria-hidden="true"></span>{{ t('home.facts.item3')
+      }}
+    </p>
+  </div>
+</div>
+
+<section class="section video-feature" aria-labelledby="video-title">
+  <div class="container video-feature-inner">
+    <div class="video-feature-text reveal">
+      <span class="kicker">{{ t('home.video.kicker') }}</span>
+      <h2 id="video-title">{{ t('home.video.title') }}</h2>
+      <p>{{ t('home.video.lede') }}</p>
+      <a
+        class="btn btn-ghost"
+        href="https://www.instagram.com/batikkembangmayang"
+        target="_blank"
+        rel="noopener"
+        >{{ t('home.video.cta') }}</a
+      >
+    </div>
+    <figure class="video-phone reveal" style="--d: 0.12s">
+      <video
+        controls
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        data-scroll-play
+        poster="{{ url_for('static', filename='img/video-poster.jpg') }}"
+        aria-label="{{ t('home.video.label') }}"
+      >
+        <source
+          src="{{ url_for('static', filename='video/profil-sanggar.mp4') }}"
+          type="video/mp4"
+        />
+        <source
+          src="{{ url_for('static', filename='video/profil-sanggar.webm') }}"
+          type="video/webm"
+        />
+      </video>
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('home.pillars.kicker') }}</span>
+      <h2>{{ t('home.pillars.title') }}</h2>
+      <p>{{ t('home.pillars.lede') }}</p>
+    </div>
+    {% set pillar_links = [ {"img": "craft-process-1.jpg", "href":
+    url_for('craft')}, {"img": "about-batik-process.jpg", "href":
+    url_for('packages')}, {"img": "about-workshop-team.jpg", "href":
+    url_for('collection')}, ] %}
+    <div class="pillars">
+      {% for pl in pillar_links %} {% set item = t('home.pillars.item' ~
+      loop.index) %}
+      <a
+        class="pillar reveal"
+        style="--d: {{ loop.index0 * 0.12 }}s"
+        href="{{ pl.href }}"
+      >
+        <figure class="pillar-photo">
+          <img
+            src="{{ url_for('static', filename='img/' ~ pl.img) }}"
+            alt=""
+            loading="lazy"
+          />
+        </figure>
+        <div class="pillar-body">
+          <h3>{{ item.title | safe }}</h3>
+          <p>{{ item.desc }}</p>
+          <span class="pillar-link">{{ item.cta }} →</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="ps" aria-labelledby="ps-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('home.process.kicker') }}</span>
+      <h2 id="ps-title">{{ t('home.process.title') }}</h2>
+      <p>{{ t('home.process.lede') }}</p>
+    </div>
+
+    <div class="ps-grid">
+      <div
+        class="ps-cloth"
+        data-stage="6"
+        data-blank="{{ t('home.process.blank') }}"
+        data-step-word="{{ t('home.process.step_word') }}"
+      >
+        <div class="bigcloth" aria-hidden="true">
+          <span class="bc-string"></span>
+          <span class="bc-peg"></span>
+          <div class="bc-hang">
+            <svg class="bc-layer bc-base" viewBox="0 0 200 200">
+              <rect width="200" height="200" fill="#fffdf7" />
+              <rect width="200" height="200" fill="url(#km-weave)" />
+            </svg>
+            <svg class="bc-layer bc-pencil" viewBox="0 0 200 200">
+              <use href="#km-outline" />
+            </svg>
+            <svg class="bc-layer bc-dye" viewBox="0 0 200 200">
+              <g mask="url(#km-resist)">
+                <rect class="bc-bg" width="200" height="200" />
+                <use class="bc-petal" href="#km-petals" />
+                <use class="bc-leaf" href="#km-leaves" />
+              </g>
+            </svg>
+            <svg class="bc-layer bc-wax" viewBox="0 0 200 200">
+              <use href="#km-outline" />
+            </svg>
+          </div>
+        </div>
+        <p class="ps-label" aria-hidden="true">
+          <span class="ps-label-num"></span><span class="ps-label-title"></span>
+        </p>
+        <ol class="ps-dots" aria-hidden="true">
+          {% for step in t('craft.process.steps') %}
+          <li></li>
+          {% endfor %}
+        </ol>
+      </div>
+
+      <ol class="ps-steps">
+        {% for step in t('craft.process.steps') %}
+        <li class="ps-step" data-step="{{ loop.index }}">
+          <span class="ps-step-num" aria-hidden="true"
+            >{{ '%02d' % loop.index }}</span
+          >
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.desc }}</p>
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <div class="ps-more">
+      <a class="btn btn-ghost" href="{{ url_for('craft') }}"
+        >{{ t('home.process.cta') }}</a
+      >
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('home.packages.kicker') }}</span>
+      <h2>{{ t('home.packages.title', price=(min_price | rupiah)) }}</h2>
+      <p>{{ t('home.packages.lede') }}</p>
+    </div>
+
+    <div class="pk-grid">
+      {% for p in featured %} {% set item = t('packages.items.' ~ p.slug) %}
+      <article class="pk-card reveal" style="--d: {{ loop.index0 * 0.14 }}s">
+        <span class="pk-tag"
+          >{{ t('packages.groups.' ~ p.group ~ '.title') }}</span
+        >
+        <div
+          class="pk-cloths"
+          aria-hidden="true"
+          style="--cm: {{ p.scale }}px; --cell: {{ p.cell }};"
+        >
+          {% for sz in p.sizes %}
+          <figure class="cloth-item">
+            <span
+              class="cloth"
+              style="--w: {{ sz[0] }}; --h: {{ sz[1] }};"
+            ></span>
+            <figcaption>{{ sz[0] }} × {{ sz[1] }} cm</figcaption>
+          </figure>
+          {% endfor %}
+        </div>
+        <h3>{{ item.name }}</h3>
+        <p class="pk-tagline">{{ item.tagline }}</p>
+        <ul class="pk-facts">
+          {% for i in p.home_facts %}
+          <li>{{ item.facts[i] }}</li>
+          {% endfor %}
+        </ul>
+        {% if item.note %}
+        <p class="pk-note">{{ item.note }}</p>
+        {% endif %}
+        <div class="pk-buy">
+          <span class="price">{{ p.price | rupiah }}</span>
+          <span class="per">{{ t('packages.per_person') }}</span>
+          <a
+            class="btn btn-primary"
+            href="{{ wa_link(t('packages.book_msg', name=item.name, price=(p.price | rupiah))) }}"
+            target="_blank"
+            rel="noopener"
+            >{{ t('packages.book') }}</a
+          >
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <div class="pk-all">
+      <a class="btn btn-ghost" href="{{ url_for('packages') }}"
+        >{{ t('home.packages.all') }}</a
+      >
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('home.edu.kicker') }}</span>
+      <h2>{{ t('home.edu.title') }}</h2>
+      <p>{{ t('home.edu.lede') }}</p>
+    </div>
+    <p class="kamus-hint">{{ t('home.edu.hint') }}</p>
+    <div class="kamus-grid">
+      {% set kamus_icons = ["malam", "canting", "nglorod", "motif"] %} {% for
+      icon in kamus_icons %} {% set item = t('home.edu.feature' ~ loop.index) %}
+      <button type="button" class="kamus-card" aria-pressed="false">
+        <span class="kamus-card-inner">
+          <span class="kamus-face kamus-front">
+            <svg
+              class="kamus-icon kamus-icon-{{ icon }}"
+              viewBox="0 0 48 48"
+              aria-hidden="true"
+              focusable="false"
+            >
+              {% if icon == "malam" %}
+              <path
+                d="M24 6c6 9 10 15 10 20a10 10 0 1 1-20 0c0-5 4-11 10-20Z"
+              />
+              <path d="M18 30c0 3 2.5 5.5 6 5.5" />
+              {% elif icon == "canting" %}
+              <path d="M10 34 30 14" />
+              <path d="M30 14c3-3 6-4 8-2s-1 5-4 8" />
+              <circle
+                cx="32"
+                cy="16"
+                r="2.2"
+                fill="currentColor"
+                stroke="none"
+              />
+              <path d="M8 36c-1.4 1.4-1.4 3.6 0 5s3.6 1.4 5 0l1-1" />
+              {% elif icon == "nglorod" %}
+              <path d="M10 24h28l-3 14H13l-3-14Z" />
+              <path d="M14 24c0-6 4.5-10 10-10s10 4 10 10" />
+              <path d="M18 6c0 2-2 2-2 4s2 2 2 4" />
+              <path d="M26 6c0 2-2 2-2 4s2 2 2 4" />
+              {% else %}
+              <path d="M24 24C20 20 20 12 24 7C28 12 28 20 24 24Z" />
+              <path
+                d="M24 24C20 20 20 12 24 7C28 12 28 20 24 24Z"
+                transform="rotate(90 24 24)"
+              />
+              <path
+                d="M24 24C20 20 20 12 24 7C28 12 28 20 24 24Z"
+                transform="rotate(180 24 24)"
+              />
+              <path
+                d="M24 24C20 20 20 12 24 7C28 12 28 20 24 24Z"
+                transform="rotate(270 24 24)"
+              />
+              <circle cx="24" cy="24" r="3" />
+              {% endif %}
+            </svg>
+            <span class="kamus-term">{{ item.title | safe }}</span>
+            <span class="kamus-flip-cue" aria-hidden="true">↻</span>
+          </span>
+          <span class="kamus-face kamus-back">
+            <p>{{ item.desc | safe }}</p>
+          </span>
+        </span>
+      </button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container cta-banner-inner">
+    <div>
+      <h2>{{ t('home.cta.title') }}</h2>
+      <p>{{ t('home.cta.lede') | safe }}</p>
+    </div>
+    <a class="btn btn-primary" href="{{ url_for('contact') }}"
+      >{{ t('home.cta.button') }}</a
+    >
+  </div>
+</section>
+
+{% endblock %}

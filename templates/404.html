@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-section error-page">
+  <div class="container">
+    <p class="eyebrow">Kembang Mayang</p>
+    <h1>Halaman tidak ditemukan</h1>
+    <p>Halaman yang kamu cari tidak tersedia atau sudah dipindahkan.</p>
+    <a class="btn btn-primary" href="{{ url_for('home') }}">Kembali ke Beranda</a>
+  </div>
+</section>
+{% endblock %}

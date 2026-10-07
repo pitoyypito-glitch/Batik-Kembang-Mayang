@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}{{ t('nav.contact') }}{% endblock %}
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('contact.kicker') | safe }}</span>
+      <h2>{{ t('contact.title') }}</h2>
+      <p>{{ t('contact.lede') | safe }}</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>{{ t('contact.info_title') }}</h2>
+        <ul class="contact-info-list">
+          <li>
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 10.5c0 5-8 10.5-8 10.5S4 15.5 4 10.5a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10.5" r="2.5"></circle></svg>
+            </span>
+            <div>
+              <h4>{{ t('contact.address_title') }}</h4>
+              <p>{{ t('contact.address_text') | safe }}</p>
+            </div>
+          </li>
+          <li>
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"></rect><circle cx="12" cy="12" r="3.5"></circle><path d="M7.5 5 9 3h6l1.5 2"></path></svg>
+            </span>
+            <div>
+              <h4>{{ t('contact.instagram_title') }}</h4>
+              <p><a href="https://www.instagram.com/batikkembangmayang" target="_blank" rel="noopener">@batikkembangmayang</a></p>
+            </div>
+          </li>
+          <li>
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m8.5 12.5 2-2a2.1 2.1 0 0 1 3 3l-1 1"></path><path d="m7 11-2 2a2.1 2.1 0 0 0 3 3l2-2"></path><path d="m13 8 2-2a2.1 2.1 0 0 1 3 3l-2 2"></path><path d="m11 16-1 1a2.1 2.1 0 0 1-3-3l1-1"></path></svg>
+            </span>
+            <div>
+              <h4>{{ t('contact.collab_title') }}</h4>
+              <p>{{ t('contact.collab_text') | safe }}</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="contact-testimonial">
+          <p>“Kami senang menjadi ruang belajar, berkarya, dan berbagi cerita tentang batik bersama masyarakat dan pengunjung.”</p>
+          <strong>Batik Kembang Mayang</strong>
+        </div>
+
+      </div>
+
+      <aside class="booking-card">
+        <h2>{{ t('contact.booking.title') }}</h2>
+        <p>{{ t('contact.booking.lede') }}</p>
+        <ul class="booking-needs">
+          {% for need in t('contact.booking.needs') %}<li>{{ need }}</li>{% endfor %}
+        </ul>
+        <a class="btn btn-primary btn-wa" href="{{ wa_link(t('contact.booking.message')) }}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.9 7L4 19.5l1.1-3.9A8 8 0 1 1 20 11.5Z"></path><path d="M9 9.5c.3 2.2 2.3 4.2 4.5 4.6l1.2-1.2-1.8-1-.8.6a3.4 3.4 0 0 1-1.4-1.4l.6-.8-1-1.8L9 9.5Z"></path></svg>
+          {{ t('contact.booking.button') }}
+        </a>
+        <p class="booking-number">WhatsApp {{ wa_display }}</p>
+
+        <div class="booking-alt">
+          
+        <a class="booking-more" href="{{ url_for('packages') }}">{{ t('contact.booking.packages_link') }}</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

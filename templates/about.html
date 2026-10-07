@@ -1,0 +1,164 @@
+{% extends "base.html" %} {% block title %}{{ t('nav.about') }}{% endblock %} {%
+block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('about.kicker') }}</span>
+      <h2>{{ t('about.title') }}</h2>
+      <p>{{ t('about.lede') }}</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="year">{{ t('about.timeline.item1.year') }}</span>
+        <p>{{ t('about.timeline.item1.text') }}</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">{{ t('about.timeline.item2.year') }}</span>
+        <p>{{ t('about.timeline.item2.text') | safe }}</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">{{ t('about.timeline.item3.year') }}</span>
+        <p>{{ t('about.timeline.item3.text') }}</p>
+      </div>
+      <div class="timeline-item">
+        <span class="year">{{ t('about.timeline.item4.year') }}</span>
+        <p>{{ t('about.timeline.item4.text') | safe }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('about.visi.kicker') | safe }}</span>
+      <h2>{{ t('about.visi.title') }}</h2>
+    </div>
+    <figure class="visi-banner reveal">
+      <span class="visi-label">{{ t('about.visi.vision_label') }}</span>
+      <blockquote class="visi-quote">
+        {{ t('about.visi.statement') }}
+      </blockquote>
+    </figure>
+
+    <figure
+      class="visi-banner misi-banner reveal"
+      style="--bg: url('{{ url_for('static', filename='img/misi-bg.jpg') }}')"
+    >
+      <span class="visi-label">{{ t('about.visi.mission_label') }}</span>
+      <ol class="misi-list">
+        {% for n in (1, 2, 3, 4) %}
+        <li>
+          <span class="misi-no" aria-hidden="true">0{{ n }}</span>
+          <div>
+            <h3 class="misi-verb">{{ t('about.feature' ~ n ~ '.title') }}</h3>
+            <p>{{ t('about.feature' ~ n ~ '.desc') | safe }}</p>
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+    </figure>
+  </div>
+</section>
+
+<section class="section jejak">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('about.stats.kicker') }}</span>
+      <h2>{{ t('about.stats.title') }}</h2>
+    </div>
+    <div class="jejak-grid">
+      <div class="jejak-lead">
+        <span class="num" data-count data-from="2010" data-delay="0"
+          >{{ t('about.stats.item1.num') }}</span
+        >
+        <span class="label">{{ t('about.stats.item1.label') | safe }}</span>
+      </div>
+
+      <div class="trail">
+        <svg
+          class="trail-svg"
+          viewBox="0 0 600 64"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            class="trail-base"
+            d="M0.0 32.0 L5.0 29.8 L10.0 27.7 L15.0 25.6 L20.0 23.8 L25.0 22.1 L30.0 20.7 L35.0 19.5 L40.0 18.7 L45.0 18.2 L50.0 18.0 L55.0 18.2 L60.0 18.7 L65.0 19.5 L70.0 20.7 L75.0 22.1 L80.0 23.8 L85.0 25.6 L90.0 27.7 L95.0 29.8 L100.0 32.0 L105.0 34.2 L110.0 36.3 L115.0 38.4 L120.0 40.2 L125.0 41.9 L130.0 43.3 L135.0 44.5 L140.0 45.3 L145.0 45.8 L150.0 46.0 L155.0 45.8 L160.0 45.3 L165.0 44.5 L170.0 43.3 L175.0 41.9 L180.0 40.2 L185.0 38.4 L190.0 36.3 L195.0 34.2 L200.0 32.0 L205.0 29.8 L210.0 27.7 L215.0 25.6 L220.0 23.8 L225.0 22.1 L230.0 20.7 L235.0 19.5 L240.0 18.7 L245.0 18.2 L250.0 18.0 L255.0 18.2 L260.0 18.7 L265.0 19.5 L270.0 20.7 L275.0 22.1 L280.0 23.8 L285.0 25.6 L290.0 27.7 L295.0 29.8 L300.0 32.0 L305.0 34.2 L310.0 36.3 L315.0 38.4 L320.0 40.2 L325.0 41.9 L330.0 43.3 L335.0 44.5 L340.0 45.3 L345.0 45.8 L350.0 46.0 L355.0 45.8 L360.0 45.3 L365.0 44.5 L370.0 43.3 L375.0 41.9 L380.0 40.2 L385.0 38.4 L390.0 36.3 L395.0 34.2 L400.0 32.0 L405.0 29.8 L410.0 27.7 L415.0 25.6 L420.0 23.8 L425.0 22.1 L430.0 20.7 L435.0 19.5 L440.0 18.7 L445.0 18.2 L450.0 18.0 L455.0 18.2 L460.0 18.7 L465.0 19.5 L470.0 20.7 L475.0 22.1 L480.0 23.8 L485.0 25.6 L490.0 27.7 L495.0 29.8 L500.0 32.0 L505.0 34.2 L510.0 36.3 L515.0 38.4 L520.0 40.2 L525.0 41.9 L530.0 43.3 L535.0 44.5 L540.0 45.3 L545.0 45.8 L550.0 46.0 L555.0 45.8 L560.0 45.3 L565.0 44.5 L570.0 43.3 L575.0 41.9 L580.0 40.2 L585.0 38.4 L590.0 36.3 L595.0 34.2 L600.0 32.0"
+          ></path>
+          <path
+            class="trail-line"
+            pathLength="1"
+            d="M0.0 32.0 L5.0 29.8 L10.0 27.7 L15.0 25.6 L20.0 23.8 L25.0 22.1 L30.0 20.7 L35.0 19.5 L40.0 18.7 L45.0 18.2 L50.0 18.0 L55.0 18.2 L60.0 18.7 L65.0 19.5 L70.0 20.7 L75.0 22.1 L80.0 23.8 L85.0 25.6 L90.0 27.7 L95.0 29.8 L100.0 32.0 L105.0 34.2 L110.0 36.3 L115.0 38.4 L120.0 40.2 L125.0 41.9 L130.0 43.3 L135.0 44.5 L140.0 45.3 L145.0 45.8 L150.0 46.0 L155.0 45.8 L160.0 45.3 L165.0 44.5 L170.0 43.3 L175.0 41.9 L180.0 40.2 L185.0 38.4 L190.0 36.3 L195.0 34.2 L200.0 32.0 L205.0 29.8 L210.0 27.7 L215.0 25.6 L220.0 23.8 L225.0 22.1 L230.0 20.7 L235.0 19.5 L240.0 18.7 L245.0 18.2 L250.0 18.0 L255.0 18.2 L260.0 18.7 L265.0 19.5 L270.0 20.7 L275.0 22.1 L280.0 23.8 L285.0 25.6 L290.0 27.7 L295.0 29.8 L300.0 32.0 L305.0 34.2 L310.0 36.3 L315.0 38.4 L320.0 40.2 L325.0 41.9 L330.0 43.3 L335.0 44.5 L340.0 45.3 L345.0 45.8 L350.0 46.0 L355.0 45.8 L360.0 45.3 L365.0 44.5 L370.0 43.3 L375.0 41.9 L380.0 40.2 L385.0 38.4 L390.0 36.3 L395.0 34.2 L400.0 32.0 L405.0 29.8 L410.0 27.7 L415.0 25.6 L420.0 23.8 L425.0 22.1 L430.0 20.7 L435.0 19.5 L440.0 18.7 L445.0 18.2 L450.0 18.0 L455.0 18.2 L460.0 18.7 L465.0 19.5 L470.0 20.7 L475.0 22.1 L480.0 23.8 L485.0 25.6 L490.0 27.7 L495.0 29.8 L500.0 32.0 L505.0 34.2 L510.0 36.3 L515.0 38.4 L520.0 40.2 L525.0 41.9 L530.0 43.3 L535.0 44.5 L540.0 45.3 L545.0 45.8 L550.0 46.0 L555.0 45.8 L560.0 45.3 L565.0 44.5 L570.0 43.3 L575.0 41.9 L580.0 40.2 L585.0 38.4 L590.0 36.3 L595.0 34.2 L600.0 32.0"
+          ></path>
+        </svg>
+        <div class="trail-items">
+          {% for n, at in ((4, 400), (3, 1200), (2, 2000)) %}
+          <div class="jejak-item" style="--t:{{ at }}ms">
+            {% set v = t('about.stats.item' ~ n ~ '.num') %}
+            <span
+              class="num{% if not (v | select('in', '0123456789') | list) %} num-word{% else %}"
+              data-count
+              data-delay="{{ at }}{% endif %}"
+              >{{ v }}</span
+            >
+            <span class="label"
+              >{{ t('about.stats.item' ~ n ~ '.label') | safe }}</span
+            >
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('about.location.kicker') }}</span>
+      <h2>{{ t('about.location.title') }}</h2>
+      <p>{{ t('about.location.lede') }}</p>
+    </div>
+
+    <div class="map-frame map-frame-wide">
+      <iframe
+        src="https://www.google.com/maps?q=Kampung+Batik+Kembang+Mayang+Larangan+Selatan+Tangerang&output=embed"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        title="{{ t('contact.map_title') }}"
+      >
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<section class="section salam">
+  <div class="container">
+    <svg
+      class="salam-write"
+      viewBox="0 0 640 130"
+      role="img"
+      aria-label="Salam Canting"
+    >
+      <text x="320" y="96" aria-hidden="true">
+        {% for c in 'Salam Canting' %}{% if c == ' ' %} {% else %}
+        <tspan class="ch" style="--i:{{ loop.index0 }}">{{ c }}</tspan>
+        {% endif %}{% endfor %}
+      </text>
+    </svg>
+    <p class="salam-line">{{ t('about.salam.line') }}</p>
+    <a
+      class="btn btn-primary"
+      href="{{ wa_link(t('about.salam.wa_message')) }}"
+      target="_blank"
+      rel="noopener"
+      >{{ t('about.salam.button') }}</a
+    >
+  </div>
+</section>
+
+{% endblock %}

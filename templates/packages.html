@@ -1,0 +1,130 @@
+{% extends "base.html" %} {% block title %}{{ t('nav.packages') }}{% endblock %}
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('packages.kicker') }}</span>
+      <h2>{{ t('packages.title') }}</h2>
+      <p>{{ t('packages.lede') }}</p>
+    </div>
+
+    {% for group in groups %}
+    <div class="package-group">
+      <div class="group-head">
+        <h3>{{ t('packages.groups.' ~ group.slug ~ '.title') }}</h3>
+        <p>{{ t('packages.groups.' ~ group.slug ~ '.lede') }}</p>
+      </div>
+
+      <ul class="package-list">
+        {% for p in group.packages %} {% set item = t('packages.items.' ~
+        p.slug) %}
+        <li class="package">
+          <div class="package-cloths" aria-hidden="true">
+            {% for s in p.sizes %}
+            <figure class="cloth-item">
+              <span
+                class="cloth"
+                style="--w: {{ s[0] }}; --h: {{ s[1] }};"
+              ></span>
+              <figcaption>{{ s[0] }} × {{ s[1] }} cm</figcaption>
+            </figure>
+            {% endfor %}
+          </div>
+
+          <div class="package-body">
+            <h4>{{ item.name }}</h4>
+            <p class="package-tagline">{{ item.tagline }}</p>
+            <ul class="package-facts">
+              {% for fact in item.facts %}
+              <li>{{ fact }}</li>
+              {% endfor %}
+            </ul>
+            {% if item.note %}
+            <p class="note-inline">{{ item.note }}</p>
+            {% endif %}
+          </div>
+
+          <div class="package-buy">
+            <span class="price">{{ p.price | rupiah }}</span>
+            <span class="per">{{ t('packages.per_person') }}</span>
+            <a
+              class="btn btn-primary"
+              href="{{ wa_link(t('packages.book_msg', name=item.name, price=(p.price | rupiah))) }}"
+              target="_blank"
+              rel="noopener"
+              >{{ t('packages.book') }}</a
+            >
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+
+    <div class="package-download">
+      <a
+        class="btn btn-ghost"
+        href="{{ url_for('download_brochure') }}"
+        data-brochure-open
+        >{{ t('packages.download') }}</a
+      >
+    </div>
+  </div>
+</section>
+
+<div class="brochure-modal" id="brochureModal" role="dialog" aria-modal="true" aria-labelledby="brochureTitle" hidden>
+  <div class="brochure-backdrop" data-brochure-close></div>
+  <div class="brochure-dialog">
+    <div class="brochure-head">
+      <div class="brochure-title">
+        <h2 id="brochureTitle">{{ t('packages.preview_title') }}</h2>
+        <p aria-live="polite">{{ t('packages.preview_page') }} <span data-brochure-current>1</span> / 6</p>
+      </div>
+      <div class="brochure-actions">
+        <a class="btn btn-primary brochure-dl" href="{{ url_for('download_brochure') }}">{{ t('packages.preview_download') }}</a>
+        <button type="button" class="brochure-x" data-brochure-close aria-label="{{ t('packages.preview_close') }}">&times;</button>
+      </div>
+    </div>
+
+    <div class="brochure-stage">
+      <button type="button" class="brochure-nav brochure-prev" data-brochure-prev aria-label="{{ t('packages.preview_prev') }}">&#8249;</button>
+      <div class="brochure-track" tabindex="0" aria-label="{{ t('packages.preview_hint') }}">
+        {% for n in range(1, 7) %}
+        <div class="brochure-slide">
+          <img
+            src="{{ url_for('static', filename='img/brosur/halaman-%d.jpg' % n) }}"
+            alt="{{ t('packages.preview_page') }} {{ n }}"
+            {% if n > 2 %}loading="lazy"{% endif %}
+          >
+        </div>
+        {% endfor %}
+      </div>
+      <button type="button" class="brochure-nav brochure-next" data-brochure-next aria-label="{{ t('packages.preview_next') }}">&#8250;</button>
+    </div>
+
+    <div class="brochure-dots">
+      {% for n in range(1, 7) %}
+      <button type="button" class="brochure-dot" data-brochure-dot="{{ n - 1 }}" aria-label="{{ t('packages.preview_page') }} {{ n }}"></button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<section class="cta-banner">
+  <div class="container cta-banner-inner">
+    <div>
+      <h2>{{ t('packages.cta.title') }}</h2>
+      <p>{{ t('packages.cta.lede') }}</p>
+    </div>
+    <a
+      class="btn btn-primary"
+      href="{{ wa_link(t('packages.cta.message')) }}"
+      target="_blank"
+      rel="noopener"
+      >{{ t('packages.cta.button') }}</a
+    >
+  </div>
+</section>
+
+{% endblock %}

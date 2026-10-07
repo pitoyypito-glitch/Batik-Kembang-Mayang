@@ -1,0 +1,134 @@
+{% extends "base.html" %} {% block title %}{{ t('nav.craft') }}{% endblock %} {%
+block content %}
+
+{# ---------- 1. Layanan ---------- #}
+{% set services = [
+  {"key": "tour",      "img": "craft-process-1.jpg",       "cta": "wa",       "pos": "50% 62%"},
+  {"key": "course",    "img": "about-batik-process.jpg",   "cta": "packages", "pos": "42% 30%"},
+  {"key": "workshop",  "img": "about-workshop-team.jpg",   "cta": "packages", "pos": "50% 50%"},
+  {"key": "mentoring", "img": "craft-process-2.jpg",       "cta": "wa",       "pos": "30% 30%"},
+  {"key": "wall",      "img": "craft-process-3.jpg",       "cta": "none",     "pos": "50% 55%"},
+] %}
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('craft.services.kicker') }}</span>
+      <h2>{{ t('craft.services.title') }}</h2>
+      <p>{{ t('craft.services.lede') }}</p>
+    </div>
+
+    <div class="services">
+      {% for sv in services %}
+      {% set item = t('craft.services.' ~ sv.key) %}
+      <article class="service">
+        <figure class="service-photo">
+          <img
+            src="{{ url_for('static', filename='img/' ~ sv.img) }}"
+            alt="{{ item.alt }}"
+            style="--pos: {{ sv.pos }}"
+            width="1000"
+            height="1000"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <div class="service-body">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.desc }}</p>
+          {% if sv.cta == 'packages' %}
+          <a class="btn btn-primary" href="{{ url_for('packages') }}">{{ item.button }}</a>
+          {% elif sv.cta == 'wa' %}
+          <a class="btn btn-primary" href="{{ wa_link(item.message) }}" target="_blank" rel="noopener">{{ item.button }}</a>
+          {% else %}
+          <span class="service-badge">{{ item.badge }}</span>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ---------- 2. Dari canting hingga kain ---------- #}
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">{{ t('craft.process.kicker') }}</span>
+      <h2>{{ t('craft.process.title') }}</h2>
+      <p>{{ t('craft.process.lede') }}</p>
+    </div>
+
+    {# Kain kecil per tahap: lapisan SVG bertumpuk (kain, pensil, pewarna, malam). #}
+{% macro swatch(n) %}
+<div class="swatch swatch-{{ n }}" aria-hidden="true">
+  <svg class="l-cloth" viewBox="0 0 200 200"><rect width="200" height="200" fill="#fffdf7"/><rect width="200" height="200" fill="url(#km-weave)"/></svg>
+  {% if n <= 2 %}<svg class="l-pencil" viewBox="0 0 200 200"><use href="#km-outline"/></svg>{% endif %}
+  {% if n >= 3 %}
+  <svg class="l-dye" viewBox="0 0 200 200"><g mask="url(#km-resist)">
+    {% if n == 3 %}
+    <path d="M0 0H200V118C168 132 150 106 120 120C90 134 62 108 32 122C18 128 8 122 0 118Z" fill="var(--dye-bg)"/>
+    <g clip-path="url(#km-wave)"><use href="#km-petals" fill="var(--petal)"/><use href="#km-leaves" fill="var(--leaf)"/></g>
+    {% else %}
+    <rect width="200" height="200" fill="var(--dye-bg)"/>
+    <use href="#km-petals" fill="var(--petal)"/><use href="#km-leaves" fill="var(--leaf)"/>
+    {% endif %}
+  </g></svg>
+  {% endif %}
+  {% if 2 <= n <= 5 %}<svg class="l-wax" viewBox="0 0 200 200"><use href="#km-outline"/></svg>{% endif %}
+</div>
+{% endmacro %}
+
+{% include "_km_defs.html" %}
+
+    <ol class="process">
+      {% for step in t('craft.process.steps') %}
+      <li class="process-step">
+        {{ swatch(loop.index) }}
+        <span class="process-step-num">{{ loop.index }}</span>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.desc }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section certified">
+  <div class="container certified-inner">
+    <div class="certified-text">
+      <span class="kicker">{{ t('craft.team.kicker') }}</span>
+      <h2>{{ t('craft.team.title') }}</h2>
+      <p>{{ t('craft.team.lede') }}</p>
+    </div>
+    <figure class="certified-figure">
+      <button type="button" class="certified-open" data-certified-open aria-label="{{ t('craft.team.zoom') }}">
+        <img
+          src="{{ url_for('static', filename='img/pendamping-sanggar.jpg') }}"
+          alt="{{ t('craft.team.alt') }}"
+          width="1080"
+          height="864"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <figcaption>{{ t('craft.team.caption') }} <span class="certified-hint">{{ t('craft.team.zoom') }}</span></figcaption>
+    </figure>
+  </div>
+  <dialog class="certified-dialog" data-certified-dialog>
+    <img src="{{ url_for('static', filename='img/pendamping-sanggar.jpg') }}" alt="{{ t('craft.team.alt') }}" />
+    <button type="button" class="certified-close" data-certified-close aria-label="{{ t('craft.team.close') }}">&times;</button>
+  </dialog>
+</section>
+<section class="cta-banner">
+  <div class="container cta-banner-inner">
+    <div>
+      <h2>{{ t('craft.cta.title') }}</h2>
+      <p>{{ t('craft.cta.lede') | safe }}</p>
+    </div>
+    <a class="btn btn-primary" href="{{ url_for('packages') }}"
+      >{{ t('craft.cta.button') }}</a
+    >
+  </div>
+</section>
+
+{% endblock %}

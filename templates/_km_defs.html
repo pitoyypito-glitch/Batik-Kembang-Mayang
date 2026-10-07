@@ -1,0 +1,31 @@
+{# Definisi SVG bersama: motif bunga Kembang Mayang, dipakai di Karya Kami & Beranda. #}
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="km-weave" width="4" height="4" patternUnits="userSpaceOnUse">
+      <path d="M0 .5H4M.5 0V4" stroke="rgba(110,80,40,.09)" stroke-width=".6"/>
+    </pattern>
+    <g id="km-petals">
+      <path pathLength="1" d="M100 38C84 60 84 86 100 106C116 86 116 60 100 38Z"/>
+      <path pathLength="1" d="M98 106C78 102 62 82 62 54C82 60 96 80 98 106Z"/>
+      <path pathLength="1" d="M102 106C122 102 138 82 138 54C118 60 104 80 102 106Z"/>
+    </g>
+    <g id="km-leaves">
+      <path pathLength="1" d="M100 152C76 152 58 138 52 118C78 118 96 130 100 152Z"/>
+      <path pathLength="1" d="M100 140C124 140 142 126 148 106C122 106 104 118 100 140Z"/>
+      <path pathLength="1" d="M25 32a5 5 0 1 0 10 0a5 5 0 1 0-10 0Z"/>
+      <path pathLength="1" d="M165 32a5 5 0 1 0 10 0a5 5 0 1 0-10 0Z"/>
+      <path pathLength="1" d="M25 168a5 5 0 1 0 10 0a5 5 0 1 0-10 0Z"/>
+      <path pathLength="1" d="M165 168a5 5 0 1 0 10 0a5 5 0 1 0-10 0Z"/>
+    </g>
+    <g id="km-lines">
+      <path pathLength="1" d="M100 106V176"/>
+      <path pathLength="1" d="M12 12H188V188H12Z"/>
+    </g>
+    <g id="km-outline"><use href="#km-petals"/><use href="#km-leaves"/><use href="#km-lines"/></g>
+    <clipPath id="km-wave"><path d="M0 0H200V118C168 132 150 106 120 120C90 134 62 108 32 122C18 128 8 122 0 118Z"/></clipPath>
+    <mask id="km-resist" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+      <rect width="200" height="200" fill="#fff"/>
+      <use href="#km-outline" fill="none" stroke="#000" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+</svg>
